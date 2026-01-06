@@ -58,6 +58,45 @@ class FloatingWindowManager(private val context: Context) {
         windowManager.addView(view, params)
     }
 
+    fun show(view: View) {
+
+        if (!Settings.canDrawOverlays(context)) {
+            throw IllegalStateException("Overlay permission not granted")
+        }
+
+        if (floatingView != null) return
+
+        val params = WindowManager.LayoutParams(
+            view.layoutParams?.width ?: WindowManager.LayoutParams.WRAP_CONTENT,
+            view.layoutParams?.height ?: WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            PixelFormat.TRANSLUCENT
+        )
+
+        params.gravity = Gravity.TOP or Gravity.START
+
+        if (view is FloatingLayout) {
+
+            params.x = view.startX
+            params.y = view.startY
+
+            if (view.draggable) {
+                view.setOnTouchListener(
+                    DragTouchListener(params, windowManager)
+                )
+            }
+
+            view.setOnCloseClickListener {
+                remove()
+            }
+        }
+
+        floatingView = view
+        windowManager.addView(view, params)
+    }
+
+
 
     fun remove() {
         floatingView?.let {

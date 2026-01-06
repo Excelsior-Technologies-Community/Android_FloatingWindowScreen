@@ -13,6 +13,10 @@ class FloatingWindow(context: Context) {
         manager.show(view, config)
     }
 
+    fun show(view: View) {
+        manager.show(view)
+    }
+
     fun dismiss() {
         manager.remove()
     }

@@ -18,6 +18,11 @@ class FloatingLayout @JvmOverloads constructor(
     private var closeButton: ImageView? = null
     private var onCloseClick: (() -> Unit)? = null
 
+    var draggable = true
+    var startX = 0
+    var startY = 200
+
+
     /** 🔥 VERY IMPORTANT FLAG */
     private var internalInflation = true
 
@@ -42,6 +47,21 @@ class FloatingLayout @JvmOverloads constructor(
         val showClose = ta.getBoolean(
             R.styleable.FloatingWindowView_fw_showClose,
             true
+        )
+
+        draggable = ta.getBoolean(
+            R.styleable.FloatingWindowView_fw_draggable,
+            true
+        )
+
+        startX = ta.getInt(
+            R.styleable.FloatingWindowView_fw_startX,
+            0
+        )
+
+        startY = ta.getInt(
+            R.styleable.FloatingWindowView_fw_startY,
+            200
         )
 
         closeButton?.visibility = if (showClose) VISIBLE else GONE

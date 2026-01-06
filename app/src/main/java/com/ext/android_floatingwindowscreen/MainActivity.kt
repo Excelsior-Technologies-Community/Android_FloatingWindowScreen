@@ -31,30 +31,17 @@ class MainActivity : AppCompatActivity() {
     }
     private fun showFloatingWindow() {
 
-        // 1️⃣ Check overlay permission
         if (!OverlayPermissionHelper.canDrawOverlays(this)) {
             OverlayPermissionHelper.requestPermission(this)
             return
         }
 
-        // 2️⃣ Inflate floating view from app module
         val floatingView = layoutInflater.inflate(
             R.layout.view_floating_test,
             null
         )
 
-        // 3️⃣ Create floating window
-        floatingWindow = FloatingWindow(this)
-
-        floatingWindow?.show(
-            floatingView,
-            FloatingWindowConfig(
-                width = 500,
-                height = 300,
-                x = 100,
-                y = 200,
-                draggable = true
-            )
-        )
+        FloatingWindow(this).show(floatingView)
     }
+
 }

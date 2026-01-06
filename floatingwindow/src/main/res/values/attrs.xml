@@ -7,5 +7,6 @@
         <attr name="fw_startX" format="integer"/>
         <attr name="fw_startY" format="integer"/>
 
+
     </declare-styleable>
 </resources>
