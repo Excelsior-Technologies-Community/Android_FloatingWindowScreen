@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.ext.floatingwindow.ui.FloatingLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
-    android:layout_height="150dp"
-    android:background="@android:color/holo_blue_light"
-    android:padding="12dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="240dp"
+    android:layout_height="160dp"
+    android:background="@drawable/bg_floating_card"
+    app:fw_showClose="true"
+    app:fw_draggable="true">
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Floating Window"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- HEADER -->
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Floating Window"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <!-- DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- CONTENT -->
+        <TextView
+            android:id="@+id/txtContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This floating window can be dragged, closed, and customized."
+            android:textColor="#CCFFFFFF"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
 
 </com.ext.floatingwindow.ui.FloatingLayout>

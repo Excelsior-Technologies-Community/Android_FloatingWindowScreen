@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FloatingWindowView">
+
+        <attr name="fw_draggable" format="boolean"/>
+        <attr name="fw_showClose" format="boolean"/>
+        <attr name="fw_startX" format="integer"/>
+        <attr name="fw_startY" format="integer"/>
+
+    </declare-styleable>
+</resources>

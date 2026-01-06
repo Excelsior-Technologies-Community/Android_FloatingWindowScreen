@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import com.ext.floatingwindow.ui.DragTouchListener
+import com.ext.floatingwindow.ui.FloatingLayout
 
 class FloatingWindowManager(private val context: Context) {
 
@@ -16,6 +17,7 @@ class FloatingWindowManager(private val context: Context) {
     private var floatingView: View? = null
 
     fun show(view: View, config: FloatingWindowConfig) {
+
         if (!Settings.canDrawOverlays(context)) {
             throw IllegalStateException("Overlay permission not granted")
         }
@@ -37,15 +39,25 @@ class FloatingWindowManager(private val context: Context) {
         params.x = config.x
         params.y = config.y
 
+        // ✅ 1️⃣ Attach close listener BEFORE adding view
+        if (view is FloatingLayout) {
+            view.setOnCloseClickListener {
+                remove()
+            }
+        }
+
+        // ✅ 2️⃣ Attach drag listener
         if (config.draggable) {
             view.setOnTouchListener(
                 DragTouchListener(params, windowManager)
             )
         }
 
+        // ✅ 3️⃣ Finally add view to WindowManager
         floatingView = view
         windowManager.addView(view, params)
     }
+
 
     fun remove() {
         floatingView?.let {
